@@ -1,0 +1,3 @@
+module comics
+
+go 1.22.1
