@@ -7,6 +7,8 @@ import (
 )
 
 func getOneComic(i int) []byte {
+	// fetch metadata about a comic by ID
+
 	return []byte{}
 }
 
@@ -24,7 +26,10 @@ func main() {
 
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error reading arguments", err)
+			os.Exit(1)
 		}
+
+		defer output.Close()
 	}
 
 	fmt.Println(&output)
