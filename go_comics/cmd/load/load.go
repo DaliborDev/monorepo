@@ -2,35 +2,43 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"os"
 )
 
-func getOneComic(i int) []byte {
-	// fetch metadata about a comic by ID
+// func getOneComic(i int) []byte {
+// 	// fetch metadata about a comic by ID
 
-	return []byte{}
-}
+// 	return []byte{}
+// }
 
 func main() {
 	var (
-		output io.WriteCloser = os.Stdout
-		err    error
-		// cnt    int
-		// fails  int
-		// data   []byte
+	// output io.WriteCloser = os.Stdout
+	// err    error
+	// cnt    int
+	// fails int
+	// data   []byte
 	)
 
-	if len(os.Args) > 1 {
-		output, err = os.Create(os.Args[1])
+	fmt.Println("Hello world")
 
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "error reading arguments", err)
-			os.Exit(1)
-		}
+	// fmt.Println(os.Args)
 
-		defer output.Close()
-	}
+	// if len(os.Args) > 1 {
+	// 	output, err = os.Create(os.Args[1])
 
-	fmt.Println(&output)
+	// 	if err != nil {
+	// 		fmt.Fprintln(os.Stderr, "error reading arguments", err)
+	// 		os.Exit(1)
+	// 	}
+
+	// 	defer output.Close()
+	// }
+
+	// fmt.Println("[")
+	// defer fmt.Println("]")
+
+	// for i := 1; fails < 2; i++ {
+	// 	fmt.Println(&output)
+	// 	fails++
+	// }
 }

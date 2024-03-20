@@ -1,6 +1,14 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "load_lib",
+    srcs = glob(["cmd/**/*.go"]),
+    visibility = ["//visibility:public"],
+)
 
 go_binary(
     name = "load",
-    srcs = glob(["cmd/**/*.go"]),
+    deps = [
+        ":load_lib",
+    ],
 )
