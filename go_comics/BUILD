@@ -8,7 +8,7 @@ go_library(
 
 go_binary(
     name = "load",
-    deps = [
+    embed = [
         ":load_lib",
     ],
 )
