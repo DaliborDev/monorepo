@@ -9,7 +9,7 @@ gazelle(name = "gazelle")
 gazelle(
     name = "gazelle-update-repos",
     args = [
-        "-from_file=go_comics/go.mod",
+        "-from_file=go-comics/go.mod",
         "-to_macro=bazel/repositories.bzl%go_dependencies",
         "-prune",
         "-build_file_proto_mode=disable_global",
