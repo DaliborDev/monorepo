@@ -4,16 +4,42 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"io/ioutil"
+	"net/http"
 	"os"
+	"time"
 )
+
+type ByteSliceCallback func(int) []byte
 
 func getOneComic(i int) []byte {
 	// fetch metadata about a comic by ID
+	url := fmt.Sprintf("https://xkcd.com/%d/info.0.json", i)
+	resp, err := http.Get(url)
 
-	return nil
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "cant read from url: %s\n", err)
+		os.Exit(1)
+	}
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		fmt.Fprintf(os.Stderr, "skipping %d, with code %d\n", i, resp.StatusCode)
+		return nil
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "something went wrong reading the body: %s\n", err)
+	}
+
+	return body
 }
 
 func main() {
+	startTime := makeTimestamp()
 	var (
 		output  io.WriteCloser = os.Stdout
 		err     error
@@ -29,16 +55,14 @@ func main() {
 			fmt.Fprintln(os.Stderr, "error reading arguments", err)
 			os.Exit(1)
 		}
-
-		defer output.Close()
 	}
 
 	fmt.Println("[")
 	defer fmt.Println("]")
 
 	for i := 1; fails < 2; i++ {
-		if data = getOneComic(i); data == nil {
-			// if there is no data, increment fails
+		data = benchmarkingWrapper(getOneComic, i)
+		if data == nil {
 			fails++
 			continue
 		}
@@ -59,4 +83,19 @@ func main() {
 	}
 
 	fmt.Fprintf(os.Stdout, "read %d comics\n", counter)
+
+	output.Close()
+
+	endTime := makeTimestamp()
+
+	fmt.Printf("Total time of execution: %d\n", endTime-startTime)
+}
+
+func benchmarkingWrapper(callback ByteSliceCallback, i int) []byte {
+
+	return callback(i)
+}
+
+func makeTimestamp() int64 {
+	return time.Now().UnixNano() / (int64(time.Millisecond) / int64(time.Nanosecond))
 }
