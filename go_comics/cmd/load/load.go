@@ -92,10 +92,15 @@ func main() {
 }
 
 func benchmarkingWrapper(callback ByteSliceCallback, i int) []byte {
+	startTime := makeTimestamp()
+	data := callback(i)
+	endTime := makeTimestamp()
+	fmt.Fprintf(os.Stdout, "request %d took %dms\n", i, endTime-startTime)
 
-	return callback(i)
+	return data
 }
 
 func makeTimestamp() int64 {
+	// https://stackoverflow.com/a/34860368
 	return time.Now().UnixNano() / (int64(time.Millisecond) / int64(time.Nanosecond))
 }
