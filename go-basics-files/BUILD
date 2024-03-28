@@ -31,5 +31,5 @@ go_binary(
     ],
     data = glob([
         "files/*"
-    ])
+    ]),
 )
