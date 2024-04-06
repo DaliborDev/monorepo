@@ -11,4 +11,7 @@ go_binary(
     embed = [
         ":lib-daemonize"
     ],
+    data = glob([
+        "files/*"
+    ])
 )

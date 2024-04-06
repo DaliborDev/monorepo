@@ -31,7 +31,12 @@ func main() {
 }
 
 func (c *config) init(args []string) error {
+	/*
+		Initialize
+		Read flags, config files and environment variables and use them in runtime
+	*/
 	flags := flag.NewFlagSet(args[0], flag.ExitOnError)
+	flags.String("config", "", "path to .conf file")
 
 	var (
 		tick = flags.Duration("interval", defaultTimeTick, "Time tick")
@@ -48,7 +53,13 @@ func (c *config) init(args []string) error {
 }
 
 func run(ctx context.Context, c *config) error {
-	c.init(os.Args)
+	/*
+		Run callback
+	*/
+	err := c.init(os.Args)
+	if err != nil {
+		return err
+	}
 
 	for {
 		select {

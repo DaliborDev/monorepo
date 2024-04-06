@@ -12,3 +12,18 @@ go_binary(
         ":lib-roman2integer"
     ],
 )
+
+# heaps
+
+go_library(
+    name = "lib-heaps",
+    srcs = glob(["heaps/**/*.go"]),
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "heaps",
+    embed = [
+        ":lib-heaps"
+    ]
+)
