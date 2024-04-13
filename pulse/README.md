@@ -1,4 +1,4 @@
-# Go daemonization
+# Pulse
 _Taken from [here](https://ieftimov.com/posts/four-steps-daemonize-your-golang-programs/)_
 
 

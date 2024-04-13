@@ -1,0 +1,14 @@
+services:
+#  proxy:
+#    container_name: proxy
+#    image: nginx:1.25.4
+#    ports:
+#      - "8080:80"
+#    restart: always
+
+  pulse:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    command: >
+      bash -c "bazel run //pulse:run -- --interval 3s"

@@ -66,7 +66,11 @@ func run(ctx context.Context, c *config) error {
 		case <-ctx.Done():
 			return nil
 		case <-time.Tick(c.tick):
-			fmt.Printf("Running every %s\n", c.tick)
+			{
+				fmt.Printf("Running every %s\n", c.tick)
+
+				fmt.Println("Ola")
+			}
 		}
 	}
 }
