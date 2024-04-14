@@ -7,8 +7,12 @@ services:
 #    restart: always
 
   pulse:
+    container_name: pulse
     build:
       context: ./
       dockerfile: docker/Dockerfile
+    volumes:
+      - ./pulse:/workspace/pulse
+    restart: always
     command: >
       bash -c "bazel run //pulse:run -- --interval 3s"

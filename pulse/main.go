@@ -15,11 +15,10 @@ type config struct {
 }
 
 func main() {
-	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-
 	c := &config{}
 
+	ctx := context.Background()
+	ctx, cancel := context.WithCancel(ctx)
 	defer func() {
 		cancel()
 	}()
@@ -53,9 +52,6 @@ func (c *config) init(args []string) error {
 }
 
 func run(ctx context.Context, c *config) error {
-	/*
-		Run callback
-	*/
 	err := c.init(os.Args)
 	if err != nil {
 		return err
@@ -68,8 +64,6 @@ func run(ctx context.Context, c *config) error {
 		case <-time.Tick(c.tick):
 			{
 				fmt.Printf("Running every %s\n", c.tick)
-
-				fmt.Println("Ola")
 			}
 		}
 	}
