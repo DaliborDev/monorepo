@@ -3,7 +3,7 @@ LABEL authors="dalibor"
 
 USER root
 
-RUN apt update && apt install wget g++ unzip zip curl -y
+RUN apt update && apt install wget g++ unzip zip curl git python3 python3-pip -y
 RUN apt full-upgrade -y
 
 # Install go
