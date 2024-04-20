@@ -15,5 +15,4 @@ gazelle(
         "-build_file_proto_mode=disable_global",
     ],
     command = "update-repos",
-    
 )

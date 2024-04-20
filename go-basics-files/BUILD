@@ -9,12 +9,12 @@ go_library(
 
 go_binary(
     name = "generate-file",
-    embed = [
-        ":generate-file-library"
-    ],
     data = glob([
-        "files/*"
-    ])
+        "files/*",
+    ]),
+    embed = [
+        ":generate-file-library",
+    ],
 )
 
 # cmd -> read
@@ -26,10 +26,10 @@ go_library(
 
 go_binary(
     name = "read-file",
+    data = glob([
+        "files/*",
+    ]),
     embed = [
         ":read-file-library",
     ],
-    data = glob([
-        "files/*"
-    ]),
 )

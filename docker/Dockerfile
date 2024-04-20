@@ -19,6 +19,12 @@ RUN wget -O bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1
     chmod +x ./bazelisk && \
     mv bazelisk /usr/bin/bazel
 
+RUN git clone https://github.com/bazelbuild/bazel-watcher.git /opt/bazel-watcher && \
+    cd /opt/bazel-watcher && \
+    bazel build //cmd/ibazel
+
+ENV PATH=$PATH:/opt/bazel-watcher/bazel-bin/cmd/ibazel/ibazel_
+
 RUN mkdir /workspace
 WORKDIR /workspace
 

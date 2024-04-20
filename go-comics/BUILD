@@ -23,10 +23,10 @@ go_library(
 
 go_binary(
     name = "search",
+    data = [
+        "files/xkcd.json",
+    ],
     embed = [
         ":search_lib",
     ],
-    data = [
-        "files/xkcd.json"
-    ]
 )

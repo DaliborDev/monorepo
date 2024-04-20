@@ -4,7 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/DaliborDev/monorepo/pulse/internal/adapters"
+	"github.com/DaliborDev/monorepo/pulse/internal"
 	"os"
 	"time"
 )
@@ -64,8 +64,8 @@ func run(ctx context.Context, c *config) error {
 			return nil
 		case <-time.Tick(c.tick):
 			{
-				fmt.Printf("Running every %s\n", c.tick)
-				fmt.Println(adapters.LoadAvgUnix())
+				//fmt.Printf("Running every %s\n", c.tick)
+				internal.ReadLoadAverage()
 			}
 		}
 	}

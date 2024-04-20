@@ -11,7 +11,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Release x64
-        uses: softprops/action-gh-release@v2
+      - uses: bazel-contrib/setup-bazel@0.8.2
         with:
-          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          # Avoid downloading Bazel every time.
+          bazelisk-cache: true
+          # Store build cache per workflow.
+          disk-cache: ${{ github.workflow }}
+          # Share repository cache between workflows.
+          repository-cache: true
+
+
+#      - name: Release x64
+#        uses: softprops/action-gh-release@v2
+#        with:
+#          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+#      - name:

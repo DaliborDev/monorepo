@@ -9,7 +9,7 @@ go_library(
 go_binary(
     name = "roman2integer",
     embed = [
-        ":lib-roman2integer"
+        ":lib-roman2integer",
     ],
 )
 
@@ -24,6 +24,6 @@ go_library(
 go_binary(
     name = "heaps",
     embed = [
-        ":lib-heaps"
-    ]
+        ":lib-heaps",
+    ],
 )
